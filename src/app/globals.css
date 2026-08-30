@@ -1,26 +1,114 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* ============================================================
+   PORTFOLIO GLOBAL STYLES
+   Premium editorial aesthetic with warm neutral palette
+   ============================================================ */
+
+/* ---------- Custom Properties ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ivory: #F5F0EB;
+  --color-cream: #EDE8E1;
+  --color-warm-gray: #D4CFC8;
+  --color-charcoal: #2C2C2C;
+  --color-dark-gray: #4A4A4A;
+  --color-muted-gray: #8A8580;
+  --color-bronze: #B8956A;
+  --color-bronze-light: #C9A97C;
+  --color-card-bg: #F0EBE4;
+  --color-border: #DDD8D1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------- Base Styles ---------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+}
+
+/* ---------- Typography ---------- */
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-mono-technical {
+  font-family: var(--font-mono);
+}
+
+/* ---------- Section Animations ---------- */
+.section-fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.section-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Scrollbar Styling ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-warm-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-gray);
+}
+
+/* ---------- Focus Styles ---------- */
+*:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background-color: var(--color-bronze-light);
+  color: var(--color-charcoal);
+}
+
+/* ---------- Utility Classes ---------- */
+.text-balance {
+  text-wrap: balance;
 }
