@@ -180,7 +180,6 @@ export const portfolio = {
       title: "Smart Buoy",
       description:
         "A floating IoT-based water monitoring system designed to monitor water conditions in real time, including water temperature, pH, turbidity, and overall water cleanliness.",
-      image: "/images/projects/smart-buoy.png",
       technologies: ["ESP32", "pH Sensor", "Turbidity Sensor", "IoT"],
       github: "",
       demo: "",
