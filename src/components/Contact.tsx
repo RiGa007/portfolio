@@ -82,7 +82,7 @@ export default function Contact() {
           {/* Primary CTA — large and prominent */}
           <a
             href={`mailto:${portfolio.contact.email}`}
-            className="group inline-flex items-center gap-3 bg-[var(--color-charcoal)] text-[var(--color-ivory)] px-10 py-5 rounded-full font-mono-technical text-sm md:text-base tracking-[0.15em] uppercase transition-all hover:bg-[var(--color-dark-gray)] hover:shadow-xl hover:gap-4 mb-20 lg:mb-24"
+            className="group inline-flex items-center gap-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] border border-[var(--color-button-primary-border)] px-10 py-5 rounded-full font-mono-technical text-sm md:text-base tracking-[0.15em] uppercase transition-all hover:bg-[var(--color-dark-gray)] hover:text-[var(--color-ivory)] hover:shadow-xl hover:gap-4 mb-20 lg:mb-24"
           >
             Get in Touch
             <ArrowRight

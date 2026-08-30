@@ -9,6 +9,28 @@
 
 /* ---------- Custom Properties ---------- */
 :root {
+  /* DARK MODE — DEFAULT FOR FIRST-TIME VISITORS */
+  --color-ivory: #221E19;
+  --color-cream: #2D2721;
+  --color-warm-gray: #4A4036;
+  --color-charcoal: #EFE9E1;
+  --color-dark-gray: #C4BCB3;
+  --color-muted-gray: #9E9388;
+  --color-bronze: #C8A36E;
+  --color-bronze-light: #DFC196;
+  --color-card-bg: #2C2620;
+  --color-border: #3E362E;
+
+  /* Button tokens */
+  --color-button-primary-bg: #1F1A15;
+  --color-button-primary-text: #EFE9E1;
+  --color-button-primary-border: #3E362E;
+  --color-button-secondary-border: #3E362E;
+  --color-button-secondary-text: #EFE9E1;
+}
+
+[data-theme="light"] {
+  /* LIGHT MODE — WARM EDITORIAL PALETTE */
   --color-ivory: #F5F0EB;
   --color-cream: #EDE8E1;
   --color-warm-gray: #D4CFC8;
@@ -19,6 +41,34 @@
   --color-bronze-light: #C9A97C;
   --color-card-bg: #F0EBE4;
   --color-border: #DDD8D1;
+
+  /* Button tokens */
+  --color-button-primary-bg: #2C2C2C;
+  --color-button-primary-text: #F5F0EB;
+  --color-button-primary-border: transparent;
+  --color-button-secondary-border: #2C2C2C;
+  --color-button-secondary-text: #2C2C2C;
+}
+
+[data-theme="dark"] {
+  /* DARK MODE — RICH WARM ESPRESSO/CHARCOAL PALETTE */
+  --color-ivory: #221E19;
+  --color-cream: #2D2721;
+  --color-warm-gray: #4A4036;
+  --color-charcoal: #EFE9E1;
+  --color-dark-gray: #C4BCB3;
+  --color-muted-gray: #9E9388;
+  --color-bronze: #C8A36E;
+  --color-bronze-light: #DFC196;
+  --color-card-bg: #2C2620;
+  --color-border: #3E362E;
+
+  /* Button tokens */
+  --color-button-primary-bg: #1F1A15;
+  --color-button-primary-text: #EFE9E1;
+  --color-button-primary-border: #3E362E;
+  --color-button-secondary-border: #3E362E;
+  --color-button-secondary-text: #EFE9E1;
 }
 
 /* ---------- Base Styles ---------- */
@@ -46,6 +96,21 @@ body {
   background-color: var(--color-ivory);
   color: var(--color-charcoal);
   font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* ---------- Theme Transition ---------- */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              fill 0.3s ease,
+              stroke 0.3s ease !important;
+  transition-delay: 0s !important;
 }
 
 /* ---------- Typography ---------- */

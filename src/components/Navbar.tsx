@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { portfolio } from "@/data/portfolio";
 import { Menu, X, FileDown } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,7 +78,7 @@ export default function Navbar() {
           className="flex items-center gap-2 group"
         >
           <span className="inline-block h-2 w-2 rounded-full bg-[var(--color-bronze)] transition-transform group-hover:scale-125" />
-          <span className="font-editorial text-lg tracking-wide">
+          <span className="font-editorial text-lg tracking-wide text-[var(--color-charcoal)]">
             <span className="font-normal">{portfolio.personal.name.split(" ")[0]}</span>{" "}
             <span className="italic font-light">
               {portfolio.personal.name.split(" ").slice(1).join(" ")}
@@ -102,26 +103,32 @@ export default function Navbar() {
             </a>
           ))}
 
+          {/* Theme Toggle Button */}
+          <ThemeToggle className="ml-1" />
+
           {/* CV Button */}
           <a
             href={portfolio.personal.cv}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3 inline-flex items-center gap-1.5 rounded-full border border-[var(--color-charcoal)] px-4 py-1.5 font-mono-technical text-[11px] tracking-[0.15em] uppercase text-[var(--color-charcoal)] transition-colors hover:bg-[var(--color-charcoal)] hover:text-[var(--color-ivory)]"
+            className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-[var(--color-button-secondary-border)] px-4 py-1.5 font-mono-technical text-[11px] tracking-[0.15em] uppercase text-[var(--color-button-secondary-text)] transition-colors hover:bg-[var(--color-charcoal)] hover:text-[var(--color-ivory)]"
           >
             CV
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="lg:hidden p-2 -mr-2"
-          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMobileOpen}
-        >
-          {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Header Controls */}
+        <div className="flex items-center gap-1.5 lg:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className="p-2 -mr-2 text-[var(--color-charcoal)]"
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileOpen}
+          >
+            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
@@ -152,7 +159,7 @@ export default function Navbar() {
             href={portfolio.personal.cv}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-charcoal)] px-6 py-2.5 font-mono-technical text-sm tracking-[0.15em] uppercase text-[var(--color-charcoal)] transition-colors hover:bg-[var(--color-charcoal)] hover:text-[var(--color-ivory)]"
+            className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-button-secondary-border)] px-6 py-2.5 font-mono-technical text-sm tracking-[0.15em] uppercase text-[var(--color-button-secondary-text)] transition-colors hover:bg-[var(--color-charcoal)] hover:text-[var(--color-ivory)]"
           >
             <FileDown size={16} />
             Download CV

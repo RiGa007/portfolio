@@ -46,46 +46,131 @@ export default function Projects() {
 
         {/* Featured projects */}
         <div className={`space-y-12 ${otherProjects.length > 0 ? "mb-16" : ""}`}>
-          {featuredProjects.map((project, index) => (
-            <div
-              key={project.title}
-              className="group bg-[var(--color-ivory)] rounded-2xl overflow-hidden border border-[var(--color-border)] transition-shadow hover:shadow-lg"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Image */}
-                <div className={`relative aspect-[4/3] lg:aspect-auto min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden bg-[#0d1117]/10 ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-muted-gray)] mb-2">
-                        Project {String(index + 1).padStart(2, "0")}
+          {featuredProjects.map((project, index) => {
+            const hasLinks = Boolean(project.github && project.github !== "") || Boolean(project.demo && project.demo !== "");
+
+            if (project.image) {
+              return (
+                <div
+                  key={project.title}
+                  className="group bg-[var(--color-ivory)] rounded-2xl overflow-hidden border border-[var(--color-border)] transition-shadow hover:shadow-lg"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-2">
+                    {/* Image */}
+                    <div className={`relative aspect-[4/3] lg:aspect-auto min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden bg-[var(--color-card-bg)] ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center p-8">
+                          <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-muted-gray)] mb-2">
+                            Project {String(index + 1).padStart(2, "0")}
+                          </p>
+                          <p className="font-editorial text-2xl text-[var(--color-dark-gray)] italic">
+                            {project.category || "Featured"}
+                          </p>
+                        </div>
+                      </div>
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Content */}
+                    <div className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
+                      <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-bronze)] mb-3">
+                        Featured Project
                       </p>
-                      <p className="font-editorial text-2xl text-[var(--color-dark-gray)] italic">
-                        {project.category || "Featured"}
+                      <h3 className="font-editorial text-2xl md:text-3xl text-[var(--color-charcoal)] mb-4">
+                        {project.title}
+                      </h3>
+                      <p className="text-[var(--color-dark-gray)] leading-relaxed mb-6">
+                        {project.description}
                       </p>
+
+                      {project.metrics && (
+                        <p className="font-mono-technical text-xs text-[var(--color-bronze)] mb-6">
+                          ● {project.metrics}
+                        </p>
+                      )}
+
+                      {/* Tech stack */}
+                      <div className={`flex flex-wrap gap-2 ${hasLinks ? "mb-8" : ""}`}>
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2.5 py-1 bg-[var(--color-cream)] text-[var(--color-muted-gray)] text-xs font-mono-technical rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Links */}
+                      {hasLinks && (
+                        <div className="flex items-center gap-4">
+                          {project.github && project.github !== "" && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 font-mono-technical text-xs tracking-[0.1em] uppercase text-[var(--color-charcoal)] hover:text-[var(--color-bronze)] transition-colors"
+                              aria-label={`View ${project.title} source code on GitHub`}
+                            >
+                              <GithubIcon size={16} />
+                              Source
+                            </a>
+                          )}
+                          {project.demo && project.demo !== "" && (
+                            <a
+                              href={project.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 font-mono-technical text-xs tracking-[0.1em] uppercase text-[var(--color-charcoal)] hover:text-[var(--color-bronze)] transition-colors"
+                              aria-label={`View ${project.title} live demo`}
+                            >
+                              <ExternalLink size={16} />
+                              Live Demo
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
                 </div>
+              );
+            }
 
-                {/* Content */}
-                <div className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
-                  <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-bronze)] mb-3">
-                    Featured Project
-                  </p>
-                  <h3 className="font-editorial text-2xl md:text-3xl text-[var(--color-charcoal)] mb-4">
-                    {project.title}
-                  </h3>
-                  <p className="text-[var(--color-dark-gray)] leading-relaxed mb-6">
+            // Clean layout for projects without an image (e.g. Smart Buoy)
+            return (
+              <div
+                key={project.title}
+                className="group bg-[var(--color-ivory)] rounded-2xl overflow-hidden border border-[var(--color-border)] transition-shadow hover:shadow-lg p-8 md:p-10 lg:p-12 min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-4">
+                    <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-bronze)]">
+                      Featured Project
+                    </p>
+                    <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-muted-gray)]">
+                      Project {String(index + 1).padStart(2, "0")}
+                    </p>
+                  </div>
+
+                  <div className="mb-3">
+                    <h3 className="font-editorial text-2xl md:text-3xl text-[var(--color-charcoal)] mb-1">
+                      {project.title}
+                    </h3>
+                    {project.category && (
+                      <p className="font-editorial text-lg text-[var(--color-bronze)] italic">
+                        {project.category}
+                      </p>
+                    )}
+                  </div>
+
+                  <p className="text-[var(--color-dark-gray)] leading-relaxed max-w-4xl mb-6">
                     {project.description}
                   </p>
 
@@ -94,9 +179,11 @@ export default function Projects() {
                       ● {project.metrics}
                     </p>
                   )}
+                </div>
 
+                <div>
                   {/* Tech stack */}
-                  <div className={`flex flex-wrap gap-2 ${(Boolean(project.github && project.github !== "") || Boolean(project.demo && project.demo !== "")) ? "mb-8" : ""}`}>
+                  <div className={`flex flex-wrap gap-2 ${hasLinks ? "mb-8" : ""}`}>
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
@@ -108,7 +195,7 @@ export default function Projects() {
                   </div>
 
                   {/* Links */}
-                  {(Boolean(project.github && project.github !== "") || Boolean(project.demo && project.demo !== "")) && (
+                  {hasLinks && (
                     <div className="flex items-center gap-4">
                       {project.github && project.github !== "" && (
                         <a
@@ -138,8 +225,8 @@ export default function Projects() {
                   )}
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Other projects grid */}
@@ -151,24 +238,23 @@ export default function Projects() {
                 className="group bg-[var(--color-ivory)] rounded-xl border border-[var(--color-border)] overflow-hidden transition-all hover:shadow-md hover:-translate-y-1"
               >
                 {/* Image */}
-                <div className="relative aspect-video overflow-hidden bg-[var(--color-warm-gray)]/20">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-muted-gray)]">
-                      Project {String(featuredProjects.length + index + 1).padStart(2, "0")}
-                    </p>
+                {project.image && (
+                  <div className="relative aspect-video overflow-hidden bg-[var(--color-warm-gray)]/20">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <p className="font-mono-technical text-[11px] tracking-[0.2em] uppercase text-[var(--color-muted-gray)]">
+                        Project {String(featuredProjects.length + index + 1).padStart(2, "0")}
+                      </p>
+                    </div>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
+                    />
                   </div>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-                </div>
+                )}
 
                 {/* Content */}
                 <div className="p-6">

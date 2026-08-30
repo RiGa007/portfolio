@@ -45,8 +45,33 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}
+      data-theme="dark"
+      className={`dark ${playfair.variable} ${inter.variable} ${jetbrains.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  try {
+    var saved = localStorage.getItem('portfolio-theme');
+    var theme = saved === 'light' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.documentElement.classList.add('dark');
+  }
+})();
+`,
+          }}
+        />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

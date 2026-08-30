@@ -87,7 +87,7 @@ export default function Hero() {
                       .querySelector("#projects")
                       ?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="inline-flex items-center gap-2 bg-[var(--color-charcoal)] text-[var(--color-ivory)] px-6 py-3 rounded-full font-mono-technical text-xs tracking-[0.15em] uppercase transition-all hover:bg-[var(--color-dark-gray)] hover:shadow-lg"
+                  className="inline-flex items-center gap-2 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] border border-[var(--color-button-primary-border)] px-6 py-3 rounded-full font-mono-technical text-xs tracking-[0.15em] uppercase transition-all hover:bg-[var(--color-dark-gray)] hover:text-[var(--color-ivory)] hover:shadow-lg"
                 >
                   View Projects
                   <ArrowDown size={14} className="-rotate-90" />
@@ -97,7 +97,7 @@ export default function Hero() {
                   href={portfolio.personal.cv}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-[var(--color-charcoal)] text-[var(--color-charcoal)] px-6 py-3 rounded-full font-mono-technical text-xs tracking-[0.15em] uppercase transition-all hover:bg-[var(--color-charcoal)] hover:text-[var(--color-ivory)]"
+                  className="inline-flex items-center gap-2 border border-[var(--color-button-secondary-border)] text-[var(--color-button-secondary-text)] px-6 py-3 rounded-full font-mono-technical text-xs tracking-[0.15em] uppercase transition-all hover:bg-[var(--color-charcoal)] hover:text-[var(--color-ivory)]"
                 >
                   <FileDown size={14} />
                   Download CV
